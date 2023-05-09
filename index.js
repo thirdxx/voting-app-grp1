@@ -15,6 +15,9 @@ app.set("view engine", "ejs");
 app.get("/vote", function (req, res) {
   res.render("pages/vote", { socketURL: defURL });
 });
+app.get("/", function (req, res) {
+  res.render("pages/vote", { socketURL: defURL });
+});
 app.get("/result", function (req, res) {
   res.render("pages/result", { socketURL: defURL });
 });
