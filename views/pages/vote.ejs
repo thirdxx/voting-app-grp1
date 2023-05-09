@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Harry Potter Voting App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <%- include('../templates/header.ejs'); %>
+    <link rel="icon" href="favicon.png" />
+    <script src="socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  </head>
+  <body>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Harry_Potter_wordmark.svg/2180px-Harry_Potter_wordmark.svg.png"
+      width="15%;"
+      style="margin-left: 550px; margin-top: 20px"
+    />
+    <h1>Who is your favorite cast?</h1>
+    <!-- <span id="span_url"><%= socketURL %></span> -->
+    <div class="container">
+      <div class="left">
+        <img
+          src="https://cdn.mensagenscomamor.com/content/images/m000111766.jpg?v=0&w=300&h=300"
+        />
+        <p>Harry Potter</p>
+        <button type="submit" class="button1" id="btn_twice" placeholder="Vote">
+          Vote
+        </button>
+      </div>
+      <div class="right">
+        <img
+          src="https://i.pinimg.com/originals/1e/a0/6c/1ea06c4d2169fe7ee74c75547c5cb1f7.jpg"
+        />
+        <p>Ron Weasley</p>
+        <button type="submit" class="button2" id="btn_bp" placeholder="Vote">
+          Vote
+        </button>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var socket = io.connect($("#span_url").html());
+
+      $("#btn_twice").click(function () {
+        socket.emit("vote_twice", "1");
+        socket.emit("vote_bp", "0");
+        alert("Vote has been counted to Harry Potter");
+      });
+      $("#btn_bp").click(function () {
+        socket.emit("vote_twice", "0");
+        socket.emit("vote_bp", "1");
+        alert("Vote has been counted to Ron Weasley");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Harry Potter Voting App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <%- include('../templates/header.ejs'); %>
+    <link rel="icon" href="favicon.png" />
+    <script src="socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  </head>
+  <body>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Harry_Potter_wordmark.svg/2180px-Harry_Potter_wordmark.svg.png"
+      width="15%;"
+      style="margin-left: 550px; margin-top: 20px"
+    />
+    <h1>Vote Count</h1>
+    <!-- <span id="span_url"><%= socketURL %></span> -->
+
+    <div class="container">
+      <div class="left">
+        <img
+          src="https://cdn.mensagenscomamor.com/content/images/m000111766.jpg?v=0&w=300&h=300"
+        />
+        <p>Harry Potter</p>
+        <span id="span_twice">0</span>
+      </div>
+      <div class="right">
+        <img
+          src="https://i.pinimg.com/originals/1e/a0/6c/1ea06c4d2169fe7ee74c75547c5cb1f7.jpg"
+        />
+        <p>Ron Weasley</p>
+        <span id="span_bp">0</span>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var socket = io.connect($("#span_url").html());
+
+      socket.on("vote_twice", function (vote) {
+        var addVote = parseInt(vote);
+        var count = parseInt($("#span_twice").html());
+
+        var newCount = count + addVote;
+        console.log(newCount);
+        $("#span_twice").html(newCount);
+      });
+
+      socket.on("vote_bp", function (vote) {
+        var addVote = parseInt(vote);
+        var count = parseInt($("#span_bp").html());
+
+        var newCount = count + addVote;
+        console.log(newCount);
+        $("#span_bp").html(newCount);
+      });
+
+      socket.on("vote_twice");
+    </script>
+  </body>
+</html>
